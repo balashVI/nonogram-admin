@@ -48,24 +48,11 @@ void MainWindow::connect_to_db(){
 
 //Оновлює дані в розділі "Локалізації"
 void MainWindow::update_languages(){
-    QSqlQuery query = db.exec("select count(id) from languages");
-    query.next();
-    ui->languages_count->setText(query.value(0).toString());
-    query = db.exec("select count(id) from words");
-    query.next();
-    ui->words_count->setText(query.value(0).toString());
+    QSqlQuery query;
     QSqlQueryModel *quer = new QSqlQueryModel(this);
     quer->setQuery("select name from languages order by name", db);
     quer->setHeaderData(0, Qt::Horizontal, QObject::trUtf8("Мова"));
-    //Чи потрібно видаляти попередню модель??????????????????????????????????????????????????????????????????????????????
     ui->languages->setModel(quer);
-    ui->previous_language->clear();
-    ui->deleted_language->clear();
-    query = db.exec("select name from languages order by name");
-    while(query.next()){
-        ui->previous_language->addItem(query.value(0).toString());
-        ui->deleted_language->addItem(query.value(0).toString());
-    }
 }
 
 //Добавляє нову мову
@@ -83,29 +70,6 @@ void MainWindow::on_pushButton_clicked()
     update_languages();
 }
 
-//Перейменовує мову
-void MainWindow::on_pushButton_2_clicked()
-{
-    QString str = ui->new_language_name->text();
-    str.remove(" ");
-    if(str==""){
-        QMessageBox::critical(NULL, "Помилка!", "Введена некоректна нова назва мови!");
-        ui->new_language_name->setText("");
-        return;
-    }
-    db.exec("update languages set name = '" + ui->new_language_name->text()+"' where name = '"
-            +ui->previous_language->currentText()+"'");
-    ui->new_language_name->setText("");
-    update_languages();
-}
-
-//Видаляє наявну мову
-void MainWindow::on_pushButton_3_clicked()
-{
-    if(ui->deleted_language->count()==0){
-        QMessageBox::critical(NULL, "Помилка!", "Список мов пустий!");
-        return;
-    }
-    db.exec("delete from languages where name = '"+ui->deleted_language->currentText()+"'");
-    update_languages();
+void MainWindow::lang_delete(){
+    QMessageBox::about(this, "yes",QString::number( ui->languages->currentIndex().row()));
 }
