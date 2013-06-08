@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
     add_context_menus();
     read_settings();
     connect_to_db();
+    ui->languages->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView_words->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
 MainWindow::~MainWindow()
