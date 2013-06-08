@@ -15,10 +15,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    queryes.cpp
+    ok_cancel.cpp \
+    localizations.cpp \
+    insert_text.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    ok_cancel.h \
+    insert_text.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    ok_cancel.ui \
+    insert_text.ui
 
 OTHER_FILES +=
