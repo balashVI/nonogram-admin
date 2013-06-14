@@ -11,11 +11,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect_to_db();
     ui->languages->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableView_words->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView_translated_words->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView_translated_words->setSelectionBehavior( QAbstractItemView::SelectRows );
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    db.close();
 }
 
 void MainWindow::update_all(){

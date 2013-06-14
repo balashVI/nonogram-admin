@@ -8,8 +8,9 @@
 #include "ok_cancel.h"
 #include "insert_text.h"
 
-const int DEL_LANGUAGE = 1;
-const int DEL_WORD = 2;
+const int LANGUAGE = 1;
+const int WORD = 2;
+const int TRANSLATION = 3;
 
 namespace Ui {
 class MainWindow;
@@ -30,13 +31,20 @@ private slots:
     void context_add_language();
     void context_selected_lang_changed();
     void context_selected_word_changed();
+    void context_selected_translation_changed();
     void context_add_word();
     void context_delete_word();
     void context_rename_word();
+    void context_delete_translation();
+    void context_change_translation();
     void activate_window(int result);
     void del(QString st, int type);
     void rename(QString newname, QString st, int type);
     void on_pushButton_4_clicked();
+
+    void on_comboBox_lang_currentIndexChanged(const QString &arg1);
+
+    void on_pushButton_5_clicked();
 
 private:
     Ui::MainWindow *ui;
