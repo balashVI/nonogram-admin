@@ -13,10 +13,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableView_words->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableView_translated_words->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableView_translated_words->setSelectionBehavior( QAbstractItemView::SelectRows );
+    new_crossword = new crossword();
+    ui->new_crossword_scroll->setWidget(new_crossword);
 }
 
 MainWindow::~MainWindow()
 {
+    delete new_crossword;
     delete ui;
     db.close();
 }
@@ -67,4 +70,16 @@ void MainWindow::connect_to_db(){
     }else{
         QMessageBox::critical(NULL, "Не вдалося підключитися до бази даних!", db.lastError().text());
     }
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    new_crossword->setSize(ui->spinBox_width->value(), ui->spinBox_height->value());
+}
+
+void MainWindow::on_horizontalSlider_valueChanged(int value)
+{
+    new_crossword->set_cell_size(value);
+    new_crossword->draw_layout();
+    new_crossword->repaint();
 }

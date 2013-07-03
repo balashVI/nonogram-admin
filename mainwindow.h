@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include "ok_cancel.h"
 #include "insert_text.h"
+#include "crossword.h"
 
 const int LANGUAGE = 1;
 const int WORD = 2;
@@ -46,6 +47,10 @@ private slots:
 
     void on_pushButton_5_clicked();
 
+    void on_pushButton_2_clicked();
+
+    void on_horizontalSlider_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui;
     void update_all();
@@ -56,6 +61,7 @@ private:
     QSqlDatabase db;
     QString host, user_name;
     bool connected;
+    crossword *new_crossword;
 };
 
 #endif // MAINWINDOW_H
